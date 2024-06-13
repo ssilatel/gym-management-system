@@ -1,7 +1,12 @@
 <?php
+require_once "lib/common.php";
+
+session_start();
+
 $root = realpath(__DIR__);
 $database = $root . "/data/data.sqlite";
 $dsn = "sqlite:" . $database;
+$pdo = getPDO();
 
 $error = "";
 
@@ -31,7 +36,6 @@ if (!$error)
 
 if (!$error)
 {
-	$pdo = new PDO($dsn);
 	$result = $pdo->exec($sql);
 	if ($result === false)
 	{
@@ -48,6 +52,31 @@ if (!$error)
 	{
 		$count = $stmt->fetchColumn();
 	}
+}
+
+$sql = "INSERT INTO user(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
+$stmt = $pdo->prepare($sql);
+if ($stmt === false)
+{
+	$error = "Could not create admin user";
+}
+$hash = password_hash("admin", PASSWORD_DEFAULT);
+if ($hash === false)
+{
+	$error = "Admin password hashing failed";
+}
+if (!$error)
+{
+	$result = $stmt->execute(array(
+		"username" => "admin",
+		"password" => $hash,
+		"created_at" => getSqlDateForNow(),
+		"is_admin" => 1,
+	));
+}
+if ($result === false)
+{
+	$error = "Could not insert admin user";
 }
 ?>
 

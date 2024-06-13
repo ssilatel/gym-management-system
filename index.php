@@ -1,3 +1,8 @@
+<?php
+require_once "lib/common.php";
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
