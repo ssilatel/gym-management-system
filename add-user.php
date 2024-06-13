@@ -3,21 +3,30 @@ require_once "lib/common.php";
 
 session_start();
 
-if (isLoggedIn())
+if (!isLoggedIn())
 {
 	redirectAndExit("index.php");
 }
 
-$username = "";
+$errors = array();
 if ($_POST)
 {
-	$pdo = getPDO();
 	$username = $_POST["username"];
-	$ok = tryLogin($pdo, $username, $_POST["password"]);
-	if ($ok)
+	if (!$username)
 	{
-		login($username);
-		redirectAndExit("index.php");
+		$errors[] = "Please enter a username";
+	}
+	$password = $_POST["password"];
+	if (!$password)
+	{
+		$errors[] = "Please enter a password";
+	}
+
+	if (!$errors)
+	{
+		$pdo = getPDO();
+		addUser($pdo, $username, $password);
+		redirectAndExit("users.php");
 	}
 }
 ?>
@@ -25,17 +34,21 @@ if ($_POST)
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Login - Gym Management System</title>
+		<title>Register - Gym Management System</title>
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
 		<?php require "templates/navbar.php" ?>
 
-		<h1>Login</h1>
+		<h1>Register</h1>
 
-		<?php if ($username): ?>
+		<?php if ($errors): ?>
 			<div>
-				The username or password is incorrect, try again
+				<ul>
+					<?php foreach ($errors as $error): ?>
+							<li><?php echo $error ?></li>
+					<?php endforeach ?>
+				</ul>
 			</div>
 		<?php endif ?>
 
@@ -48,7 +61,7 @@ if ($_POST)
 				<label for="password">Password:</label>
 				<input type="password" id="password" name="password">
 			</div>
-			<button type="submit">Login</button>
+			<button type="submit">Add User</button>
 		</form>
 	</body>
 </html>

@@ -115,11 +115,11 @@ function getAuthUser()
 	return isLoggedIn() ? $_SESSION["logged_in_username"] : null;
 }
 
-function registerUser(PDO $pdo, $username, $password)
+function addUser(PDO $pdo, $username, $password)
 {
 	$error = "";
 
-	$sql = "INSERT INTO user(username, password, created_at, is_admin VALUES(:username, :password, :created_at, :is_admin)";
+	$sql = "INSERT INTO user(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
 	$stmt = $pdo->prepare($sql);
 
 	$hash = password_hash($password, PASSWORD_DEFAULT);
@@ -132,8 +132,9 @@ function registerUser(PDO $pdo, $username, $password)
 	{
 		$result = $stmt->execute(array(
 			"username" => $username,
-			"password" => $password,
+			"password" => $hash,
 			"created_at" => getSqlDateForNow(),
+			"is_admin" => 0,
 		));
 		if ($result === false)
 		{

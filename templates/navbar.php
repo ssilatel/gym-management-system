@@ -1,10 +1,12 @@
 <nav>
 	<div>
 		<a href="index.php">Home</a>
-		<a href="#">Users</a>
-		<a href="#">Members</a>
-		<a href="#">Products</a>
-		<a href="#">Settings</a>
+		<?php if (isLoggedIn()): ?>
+			 | <a href="users.php">Users</a>
+			 | <a href="#">Members</a>
+			 | <a href="#">Products</a>
+			 | <a href="#">Settings</a>
+		<?php endif ?>
 	</div>
 	<div>
 		<?php if (isLoggedIn()): ?>
