@@ -34,13 +34,13 @@ if ($_POST)
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Register - Gym Management System</title>
+		<title>Add User - Gym Management System</title>
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
 		<?php require "templates/navbar.php" ?>
 
-		<h1>Register</h1>
+		<h1>Add User</h1>
 
 		<?php if ($errors): ?>
 			<div>
@@ -62,6 +62,7 @@ if ($_POST)
 				<input type="password" id="password" name="password">
 			</div>
 			<button type="submit">Add User</button>
+			<a href="users.php">Cancel</a>
 		</form>
 	</body>
 </html>
