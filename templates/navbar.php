@@ -11,6 +11,7 @@
 	<div>
 		<?php if (isLoggedIn()): ?>
 			<span>Hello <?php echo htmlEscape(getAuthUser()) ?> | 
+			<a href="install.php">Install</a> | 
 			<a href="logout.php">Logout</a>
 		<?php else: ?>
 			<a href="install.php">Install</a> | 

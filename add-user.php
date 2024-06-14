@@ -1,5 +1,6 @@
 <?php
 require_once "lib/common.php";
+require_once "lib/users.php";
 
 session_start();
 
@@ -25,8 +26,15 @@ if ($_POST)
 	if (!$errors)
 	{
 		$pdo = getPDO();
-		addUser($pdo, $username, $password);
-		redirectAndExit("users.php");
+		$result = addUser($pdo, $username, $password);
+		if (!$result)
+		{
+			$errors[] = "That username is already in use";
+		}
+		else
+		{
+			redirectAndExit("users.php");
+		}
 	}
 }
 ?>
