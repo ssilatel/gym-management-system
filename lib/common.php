@@ -144,4 +144,26 @@ function addUser(PDO $pdo, $username, $password)
 
 	return $result;
 }
+
+function getAllUsers(PDO $pdo)
+{
+	$stmt = $pdo->query("SELECT id, username, created_at FROM user");
+	if ($stmt === false)
+	{
+		throw new Exception("There was a problem preparing the query");
+	}
+
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function deleteUser(PDO $pdo, $userID)
+{
+	$sql = "DELETE FROM user WHERE id = :id";
+	$stmt = $pdo->prepare($sql);
+	if ($stmt === false)
+	{
+		throw new Exception("There was a problem preparing the query");
+	}
+	$stmt->execute(array("id" => $userID, ));
+}
 ?>
