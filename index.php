@@ -3,6 +3,7 @@ require_once "lib/common.php";
 
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,6 +11,8 @@ session_start();
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
+		</div>
 	</body>
 </html>

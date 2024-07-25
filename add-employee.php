@@ -46,31 +46,33 @@ if ($_POST)
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
 
-		<h1>Add Employee</h1>
+			<h1 class="mt-4 mb-4 display-6">Add Employee</h1>
 
-		<?php if ($errors): ?>
-			<div>
-				<ul>
-					<?php foreach ($errors as $error): ?>
-							<li><?php echo $error ?></li>
-					<?php endforeach ?>
-				</ul>
-			</div>
-		<?php endif ?>
+			<?php if ($errors): ?>
+				<div>
+					<ul>
+						<?php foreach ($errors as $error): ?>
+								<li><?php echo $error ?></li>
+						<?php endforeach ?>
+					</ul>
+				</div>
+			<?php endif ?>
 
-		<form method="post">
-			<div>
-				<label for="username">Username:</label>
-				<input type="text" id="username" name="username">
-			</div>
-			<div>
-				<label for="password">Password:</label>
-				<input type="password" id="password" name="password">
-			</div>
-			<button type="submit">Add Employee</button>
-			<a href="employees.php">Cancel</a>
-		</form>
+			<form method="post">
+				<div class="mb-3">
+					<label class="form-label" for="username">Username:</label>
+					<input type="text" class="form-control" id="username" name="username">
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="password">Password:</label>
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<button class="btn btn-primary" type="submit">Add Employee</button>
+				<a class="btn btn-warning" href="employees.php">Cancel</a>
+			</form>
+		</div>
 	</body>
 </html>

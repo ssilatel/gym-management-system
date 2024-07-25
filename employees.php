@@ -35,29 +35,37 @@ $employees = getAllEmployees($pdo);
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
 
-		<a href="add-employee.php">Add Employee</a>
+			<div class="container mt-5">
+				<a class="btn btn-primary" href="add-employee.php">Add Employee</a>
+			</div>
 
-		<form method="post">
-			<table id="employee-list">
-				<thead>
-					<tr>
-						<th>Username</th>
-						<th>Created</th>
-						<th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($employees as $employee): ?>
-						<tr>
-							<td><?php echo htmlEscape($employee["username"]) ?></td>
-							<td><?php echo convertSqlDatetime($employee["created_at"]) ?></td>
-							<td><input type="submit" name="delete-employee[<?php echo $employee['id'] ?>]" value="Delete"></td>
-						</tr>
-					<?php endforeach ?>
-				</tbody>
-			</table>
-		</form>
+			<div class="container mt-5">
+				<form method="post">
+					<div class="table-responsive">
+						<table class="table table-hover table-bordered align-middle" id="employee-list">
+							<thead>
+								<tr>
+									<th>Username</th>
+									<th>Created</th>
+									<th>
+								</tr>
+							</thead>
+							<tbody class="table-group-divider">
+								<?php foreach ($employees as $employee): ?>
+									<tr>
+										<td><?php echo htmlEscape($employee["username"]) ?></td>
+										<td><?php echo convertSqlDatetime($employee["created_at"]) ?></td>
+										<td><input class="btn btn-danger" type="submit" name="delete-employee[<?php echo $employee['id'] ?>]" value="Delete"></td>
+									</tr>
+								<?php endforeach ?>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

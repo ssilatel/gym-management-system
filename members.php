@@ -35,33 +35,40 @@ $members = getAllMembers($pdo);
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
 
-		<a href="add-member.php">Add Member</a>
+			<div class="container mt-5">
+				<a class="btn btn-primary" href="add-member.php">Add Member</a>
+			</div>
 
-		<form method="post">
-			<table id="member-list">
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Birthday</th>
-						<th>Created</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($members as $member): ?>
-						<tr>
-							<td><?php echo htmlEscape($member["first_name"]) ?></td>
-							<td><?php echo htmlEscape($member["last_name"]) ?></td>
-							<td><?php echo convertSqlDate($member["birthday"]) ?></td>
-							<td><?php echo convertSqlDatetime($member["created_at"]) ?></td>
-							<td><input type="submit" name="delete-member[<?php echo $member['id'] ?>]" value="Delete"></td>
-						</tr>
-					<?php endforeach ?>
-				</tbody>
-			</table>
-		</form>
+			<div class="container mt-5">
+				<form method="post">
+					<div class="table-responsive">
+						<table class="table table-hover table-bordered align-middle" id="member-list">
+							<thead>
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Birthday</th>
+									<th>Created</th>
+								</tr>
+							</thead>
+							<tbody class="table-group-divider">
+								<?php foreach ($members as $member): ?>
+									<tr>
+										<td><?php echo htmlEscape($member["first_name"]) ?></td>
+										<td><?php echo htmlEscape($member["last_name"]) ?></td>
+										<td><?php echo convertSqlDate($member["birthday"]) ?></td>
+										<td><?php echo convertSqlDatetime($member["created_at"]) ?></td>
+										<td><input class="btn btn-danger" type="submit" name="delete-member[<?php echo $member['id'] ?>]" value="Delete"></td>
+									</tr>
+								<?php endforeach ?>
+							</tbody>
+						</table>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>
 

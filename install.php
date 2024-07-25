@@ -87,19 +87,21 @@ if ($result === false)
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
 
-		<?php if ($error): ?>
-			<div>
-				<?php echo $error ?>
-			</div>
-		<?php else: ?>
-			<div>
-				The database and demo data was created successfully.
-				<?php if ($count): ?>
-					<?php echo $count ?> new users were created.
-				<?php endif ?>
-			</div>
-		<?php endif ?>
+			<?php if ($error): ?>
+				<div>
+					<?php echo $error ?>
+				</div>
+			<?php else: ?>
+				<div>
+					The database and demo data was created successfully.
+					<?php if ($count): ?>
+						<?php echo $count ?> new users were created.
+					<?php endif ?>
+				</div>
+			<?php endif ?>
+		</div>
 	</body>
 </html>

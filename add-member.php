@@ -51,35 +51,37 @@ if ($_POST)
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<?php require "templates/navbar.php" ?>
+		<div class="container">
+			<?php require "templates/navbar.php" ?>
 
-		<h1>Add Member</h1>
+			<h1 class="mt-4 mb-4 display-6">Add Member</h1>
 
-		<?php if ($errors): ?>
-			<div>
-				<ul>
-					<?php foreach ($errors as $error): ?>
-						<li><?php echo $error ?></li>
-					<?php endforeach ?>
-				</ul>
-			</div>
-		<?php endif ?>
-		
-		<form method="post">
-			<div>
-				<label for="first_name">First Name:</label>
-				<input type="text" id="first_name" name="first_name">
-			</div>
-			<div>
-				<label for="last_name">Last Name:</label>
-				<input type="text" id="last_name" name="last_name">
-			</div>
-			<div>
-				<label for="birthday">Birthday:</label>
-				<input type="date" id="birthday" name="birthday">
-			</div>
-			<button type="submit">Add Member</button>
-			<a href="members.php">Cancel</a>
-		</form>
+			<?php if ($errors): ?>
+				<div>
+					<ul>
+						<?php foreach ($errors as $error): ?>
+							<li><?php echo $error ?></li>
+						<?php endforeach ?>
+					</ul>
+				</div>
+			<?php endif ?>
+			
+			<form method="post">
+				<div class="mb-3">
+					<label class="form-label" for="first_name">First Name:</label>
+					<input type="text" class="form-control" id="first_name" name="first_name">
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="last_name">Last Name:</label>
+					<input type="text" class="form-control" id="last_name" name="last_name">
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="birthday">Birthday:</label>
+					<input type="date" class="form-control" id="birthday" name="birthday">
+				</div>
+				<button class="btn btn-primary" type="submit">Add Member</button>
+				<a class="btn btn-warning" href="members.php">Cancel</a>
+			</form>
+		</div>
 	</body>
 </html>
