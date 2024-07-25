@@ -46,7 +46,7 @@ if (!$error)
 $count = null;
 if (!$error)
 {
-	$sql = "SELECT COUNT(*) AS c FROM user";
+	$sql = "SELECT COUNT(*) AS c FROM employee";
 	$stmt = $pdo->query($sql);
 	if ($stmt)
 	{
@@ -54,7 +54,7 @@ if (!$error)
 	}
 }
 
-$sql = "INSERT INTO user(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
+$sql = "INSERT INTO employee(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
 $stmt = $pdo->prepare($sql);
 if ($stmt === false)
 {

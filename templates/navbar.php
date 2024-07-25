@@ -2,8 +2,8 @@
 	<div>
 		<a href="index.php">Home</a>
 		<?php if (isLoggedIn()): ?>
-			 | <a href="users.php">Users</a>
-			 | <a href="#">Members</a>
+			 | <a href="employees.php">Employees</a>
+			 | <a href="members.php">Members</a>
 			 | <a href="#">Products</a>
 			 | <a href="#">Settings</a>
 		<?php endif ?>

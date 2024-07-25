@@ -58,11 +58,18 @@ function htmlEscape($html)
 	return htmlspecialchars($html, ENT_HTML5, "UTF-8");
 }
 
-function convertSqlDate($sqlDate)
+function convertSqlDatetime($sqlDate)
 {
 	$date = DateTime::createFromFormat("Y-m-d H:i:s", $sqlDate);
 
 	return $date->format("d M Y, H:i");
+}
+
+function convertSqlDate($sqlDate)
+{
+	$date = DateTime::createFromFormat("Y-m-d", $sqlDate);
+
+	return $date->format("d M Y");
 }
 
 function getSqlDateForNow()
@@ -83,7 +90,7 @@ function redirectAndExit($script)
 
 function tryLogin(PDO $pdo, $username, $password)
 {
-	$sql = "SELECT password FROM user WHERE username = :username";
+	$sql = "SELECT password FROM employee WHERE username = :username";
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(array("username" => $username, ));
 

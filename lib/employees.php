@@ -1,9 +1,9 @@
 <?php
-function addUser(PDO $pdo, $username, $password)
+function addEmployee(PDO $pdo, $username, $password)
 {
 	$error = "";
 
-	$sql = "INSERT INTO user(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
+	$sql = "INSERT INTO employee(username, password, created_at, is_admin) VALUES(:username, :password, :created_at, :is_admin)";
 	$stmt = $pdo->prepare($sql);
 
 	$hash = password_hash($password, PASSWORD_DEFAULT);
@@ -33,9 +33,9 @@ function addUser(PDO $pdo, $username, $password)
 	return false;
 }
 
-function getAllUsers(PDO $pdo)
+function getAllEmployees(PDO $pdo)
 {
-	$stmt = $pdo->query("SELECT id, username, created_at FROM user");
+	$stmt = $pdo->query("SELECT id, username, created_at FROM employee");
 	if ($stmt === false)
 	{
 		throw new Exception("There was a problem preparing the query");
@@ -44,14 +44,14 @@ function getAllUsers(PDO $pdo)
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function deleteUser(PDO $pdo, $userID)
+function deleteEmployee(PDO $pdo, $employeeID)
 {
-	$sql = "DELETE FROM user WHERE id = :id";
+	$sql = "DELETE FROM employee WHERE id = :id";
 	$stmt = $pdo->prepare($sql);
 	if ($stmt === false)
 	{
 		throw new Exception("There was a problem preparing the query");
 	}
-	$stmt->execute(array("id" => $userID, ));
+	$stmt->execute(array("id" => $employeeID, ));
 }
 ?>

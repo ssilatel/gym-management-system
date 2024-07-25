@@ -1,6 +1,6 @@
 <?php
 require_once "lib/common.php";
-require_once "lib/users.php";
+require_once "lib/employees.php";
 
 session_start();
 
@@ -26,14 +26,14 @@ if ($_POST)
 	if (!$errors)
 	{
 		$pdo = getPDO();
-		$result = addUser($pdo, $username, $password);
+		$result = addEmployee($pdo, $username, $password);
 		if (!$result)
 		{
 			$errors[] = "That username is already in use";
 		}
 		else
 		{
-			redirectAndExit("users.php");
+			redirectAndExit("employees.php");
 		}
 	}
 }
@@ -42,13 +42,13 @@ if ($_POST)
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Add User - Gym Management System</title>
+		<title>Add Employee - Gym Management System</title>
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
 		<?php require "templates/navbar.php" ?>
 
-		<h1>Add User</h1>
+		<h1>Add Employee</h1>
 
 		<?php if ($errors): ?>
 			<div>
@@ -69,8 +69,8 @@ if ($_POST)
 				<label for="password">Password:</label>
 				<input type="password" id="password" name="password">
 			</div>
-			<button type="submit">Add User</button>
-			<a href="users.php">Cancel</a>
+			<button type="submit">Add Employee</button>
+			<a href="employees.php">Cancel</a>
 		</form>
 	</body>
 </html>
