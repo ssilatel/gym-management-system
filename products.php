@@ -48,7 +48,7 @@ $members = getAllMembers($pdo);
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-center">
 			<?php require "templates/navbar.php" ?>
 
 			<div class="container mt-5">

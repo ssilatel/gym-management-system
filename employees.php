@@ -35,7 +35,7 @@ $employees = getAllEmployees($pdo);
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-center">
 			<?php require "templates/navbar.php" ?>
 
 			<div class="container mt-5">

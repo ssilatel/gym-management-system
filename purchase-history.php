@@ -20,7 +20,7 @@ $purchases = getAllPurchases($pdo);
 		<?php require "templates/header.php" ?>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-center">
 			<?php require "templates/navbar.php" ?>
 
 			<h1 class="mt-4 mb-4 display-6">Purchase History</h1>
