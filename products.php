@@ -106,6 +106,12 @@ $members = getAllMembers($pdo);
 					$.post(window.location.href, {
 						"product-id": productID,
 						"member-id": memberID
+					})
+					.done(function(response) {
+						window.location.reload();
+					})
+					.fail(function(jqXHR, textStatus, errorThrown) {
+						console.error("Error during purchase request:", textStatus, errorThrown);
 					});
 				});
 			});
