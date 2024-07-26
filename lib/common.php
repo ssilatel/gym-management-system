@@ -121,4 +121,29 @@ function getAuthUser()
 {
 	return isLoggedIn() ? $_SESSION["logged_in_username"] : null;
 }
+
+function getUserID()
+{
+	if (!isLoggedIn())
+	{
+		return "";
+	}
+
+	$pdo = getPDO();
+	$username = $_SESSION["logged_in_username"];
+
+	$sql = "SELECT id FROM employee WHERE username = :username";
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(array("username" => $username, ));
+
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	if ($result["id"])
+	{
+		return $result["id"];
+	}
+	else
+	{
+		return "";
+	}
+}
 ?>

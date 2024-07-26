@@ -66,6 +66,7 @@ $members = getAllMembers($pdo);
 								<?php endforeach ?>
 							</tbody>
 						</table>
+					</div>
 				</form>
 			</div>
 		</div>
