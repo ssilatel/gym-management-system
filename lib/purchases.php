@@ -1,7 +1,7 @@
 <?php
 function getAllPurchases(PDO $pdo)
 {
-	$stmt = $pdo->query("SELECT product_id, member_id, employee_id, purchase_date FROM purchase");
+	$stmt = $pdo->query("SELECT product_id, member_id, employee_id, purchase_date FROM purchase ORDER BY purchase_date DESC");
 	if ($stmt === false)
 	{
 		throw new Exception("There was a problem preparing the query");
