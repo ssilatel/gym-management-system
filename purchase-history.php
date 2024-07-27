@@ -10,7 +10,10 @@ if (!isLoggedIn())
 }
 
 $pdo = getPDO();
-$purchases = getAllPurchases($pdo);
+$count = purchaseCount($pdo);
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : 1;
+$resultsPerPage = 10;
+$purchases = getPurchases($pdo, $page, $resultsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +50,35 @@ $purchases = getAllPurchases($pdo);
 							<?php endforeach ?>
 						</tbody>
 					</table>
+					<div class="container d-flex">
+						<nav class="col" aria-label="Page navigation">
+							<ul class="pagination mx-auto justify-content-center">
+								<?php if ($page - 1 <= 0): ?>
+									<li class="page-item"><a class="page-link disabled">&laquo</a></li>
+								<?php else: ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page - 1) ?>">&laquo</a></li>
+								<?php endif ?>
+								<?php if ($page - 2 > 0): ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page - 2) ?>"><?php echo ($page - 2); ?></a></li>
+								<?php endif ?>
+								<?php if ($page - 1 > 0): ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page - 1) ?>"><?php echo ($page - 1); ?></a></li>
+								<?php endif ?>
+								<li class="page-item"><a class="page-link active"><?php echo $page ?></a></li>
+								<?php if ( $resultsPerPage * $page < $count): ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page + 1) ?>"><?php echo ($page + 1); ?></a></li>
+								<?php endif ?>
+								<?php if ($resultsPerPage * $page + $page + 1 < $count): ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page + 2) ?>"><?php echo ($page + 2); ?></a></li>
+								<?php endif ?>
+								<?php if ($page * $resultsPerPage >= $count): ?>
+									<li class="page-item"><a class="page-link disabled">&raquo</a></li>
+								<?php else: ?>
+									<li class="page-item"><a class="page-link" href="purchase-history.php?page=<?php echo ($page + 1) ?>">&raquo</a></li>
+								<?php endif ?>
+							</ul>
+						</nav>
+					</div>
 				</div>
 			</div>
 		</div>

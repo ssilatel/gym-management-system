@@ -1,15 +1,4 @@
 <?php
-function getAllPurchases(PDO $pdo)
-{
-	$stmt = $pdo->query("SELECT product_id, member_id, employee_id, purchase_date FROM purchase ORDER BY purchase_date DESC");
-	if ($stmt === false)
-	{
-		throw new Exception("There was a problem preparing the query");
-	}
-
-	return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 function getProductName(PDO $pdo, $id)
 {
 	$sql = "SELECT name FROM product WHERE id = :id";
@@ -41,5 +30,23 @@ function getEmployeeUsername(PDO $pdo, $id)
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	return $result[0]["username"];
+}
+
+function purchaseCount(PDO $pdo)
+{
+	$stmt = $pdo->prepare("SELECT COUNT(*) FROM purchase");
+	$stmt->execute();
+
+	$count = $stmt->fetchColumn();
+	return $count;
+}
+
+function getPurchases(PDO $pdo, $page, $resultsPerPage)
+{
+	$start = ($page - 1) * $resultsPerPage;
+	$stmt = $pdo->query("SELECT product_id, member_id, employee_id, purchase_date FROM purchase ORDER BY purchase_date DESC LIMIT $start, $resultsPerPage");
+	$stmt->execute();
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	return $result;
 }
 ?>

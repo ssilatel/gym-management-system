@@ -53,7 +53,7 @@ $members = getAllMembers($pdo);
 
 			<div class="container mt-5">
 				<a class="btn btn-primary" href="add-product.php">Add Product</a>
-				<a class="btn btn-outline-primary" href="purchase-history.php">Purchase History</a>
+				<a class="btn btn-outline-primary" href="purchase-history.php?page=1">Purchase History</a>
 			</div>
 
 			<div class="container mt-5">
